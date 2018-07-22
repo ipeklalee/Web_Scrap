@@ -12,5 +12,6 @@ json - required for return format
 sys - used to interact with the command line
 
 # Usage
+Python Python 2.7.10 is required to run this application. [install Python 2.7.10 ](https://www.python.org/downloads/release/python-2710/")
 python hackernews.py --posts n
 python hackernews.py: calls the program n: how many posts to print. A positive integer <= 100.
