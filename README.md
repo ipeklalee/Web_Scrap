@@ -10,6 +10,7 @@ _LIBRARIES:_ <br/>
 4- [lxml](https://lxml.de/)  - used for processing html <br/>
 5- [json](https://docs.python.org/2/library/json.html) - required for return format <br/>
 6- [sys](https://docs.python.org/2/library/sys.html) - used to interact with the command line <br/>
+7- [argparse](https://docs.python.org/2/library/argparse.html) - used to parse arguments <br/>
 
 # Usage
 Python Python 2.7.10 is required to run this application. [install Python 2.7.10 ](https://www.python.org/downloads/release/python-2710/") <br/>
