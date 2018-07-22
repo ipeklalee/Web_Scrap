@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup #used for html scrap
 from lxml import html #used for processing html
 import json #return format
 import sys
+import argparse #argument parser
 
 
 def web_scrap(maxRec_):
