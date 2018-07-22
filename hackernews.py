@@ -77,12 +77,15 @@ def web_scrap(maxRec_):
     python2json=json.dumps(records, indent=4)
     print python2json
 
-if __name__ == '__main__':
-	if len(sys.argv) == 3:
-		maxRec_ = int(sys.argv[2])
-		if (maxRec_ > 100): print 'How many posts to print must be equal or less than 100'
-		if (maxRec_ <= 100): 	
-			web_scrap(maxRec_)
-	else: 
-		print ' usage: python hackernews.py --posts <how many posts to print>'
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--posts", help="how many posts to print. A positive integer <= 100")
+    args = parser.parse_args()
+    if args.posts:
+    	if 0 < int(args.posts) <= 100:
+    		web_scrap(int(args.posts))
+    	else:
+    		print "Posts must be a positive integer <= 100"
+    else:
+    	parser.print_help()
 		
