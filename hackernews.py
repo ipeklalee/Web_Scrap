@@ -30,10 +30,17 @@ def web_scrap(maxRec_):
         #ret = urllib2.urlopen(a[0].get("href"))
         #if ret.code == 200: uri = a[0].get("href")
 
-        uri = a[0].get("href") #returns uri value for the current loop which is in a[0]
-        title = a[0].text #returns title value for the current loop which is in a[0] as a text
+        if(len(a)>=1):
+            uri = a[0].get("href") #returns uri value for the current loop which is in a[0]
+            title = a[0].text #returns title value for the current loop which is in a[0] as a text
+        else: 
+            uri = ''
+            title = ''
+		
         span = div.find_all('span', class_="rank", ) #rank is under tag span class rank
-        rank, s = span[0].text.split('.') #split with dot to get rank as a number       
+	#checks for out of index
+	if(len(span)>=0): rank, s = span[0].text.split('.') #split with dot to get rank as a number
+        else: rank = 0
         if (rank < 0): rank = 0 #check for negative number as a point value
         else: rank, s = span[0].text.split('.')
 
@@ -48,8 +55,10 @@ def web_scrap(maxRec_):
         a = div.find_all('a') #find all a tags in the td tag of the current loop
 
         #check for empty author value
-        if (a[0].text): author = a[0].text #returns author value for the current loop which is in a[0]
-        else:  author = 'no author name'
+        if(len(a)>= 1):
+            if (a[0].text): author = a[0].text #returns author value for the current loop which is in a[0]
+            else:  author = 'no author name'
+        else: author = 'no author name'
 		
 	if(len(a)>=4) : comments_arr = a[3].text.split() #returns author value for the current loop which is in a[0], split to remove string 'comment'
         else: comments_arr = a[1].text.split() #returns author value for the current loop which is in a[0], split to remove string 'comment'
@@ -59,8 +68,9 @@ def web_scrap(maxRec_):
         else:comments = comments_arr[0] #comments_arr[0]=number of comments
 
         span = div.find_all('span') #points is under span tag
-        points_arr = span[0].text.split()
-
+        if(len(span)>=1): points_arr = span[0].text.split() #index checks
+        else: points_arr = '0'
+		
         #check for negative number as a point value
         if (points_arr[0] < 0): points = 0
         else: points = points_arr[0]
