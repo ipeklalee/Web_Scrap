@@ -39,10 +39,11 @@ def web_scrap(maxRec_):
 		
         span = div.find_all('span', class_="rank", ) #rank is under tag span class rank
 	#checks for out of index
-	if(len(span)>=0): rank, s = span[0].text.split('.') #split with dot to get rank as a number
+        if(len(span)>=0): 
+            rank_arr = span[0].text.split('.') #split with dot to get rank as a number
+            if (rank_arr[0] < 0): rank = 0 #check for negative number as a point value
+            else: rank = rank_arr[0]
         else: rank = 0
-        if (rank < 0): rank = 0 #check for negative number as a point value
-        else: rank, s = span[0].text.split('.')
 
         records.append({"title": title, "uri":uri, "rank": rank}) #add pairs to the current index of array of dictionaries
         cnt = cnt + 1 #increase count 
