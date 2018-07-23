@@ -1,5 +1,5 @@
 # About
-Web_Scrap is a python script that does data extraction from [Hacker News](https://news.ycombinator.com/news?p=2) website. <br/>
+Web_Scrap is a python script that is used for data extraction from [Hacker News](https://news.ycombinator.com/news?p=2) website. <br/>
 Application takes max number of records to return as a parameter, outputs to STDOUT in JSON Format. <br/>
 It extracts "title", "uri", "author", "points", "comment", "rank" values for top posts in the web site. <br/>
 
@@ -13,6 +13,6 @@ _LIBRARIES:_ <br/>
 7- [argparse](https://docs.python.org/2/library/argparse.html) - used to parse arguments <br/>
 
 # Usage
-Python Python 2.7.10 is required to run this application. [install Python 2.7.10 ](https://www.python.org/downloads/release/python-2710/") <br/>
+Python 2.7.10 is required to run this application. [install Python 2.7.10 ](https://www.python.org/downloads/release/python-2710/") <br/>
 CMD call: python hackernews.py --posts n <br/>
 Description: python hackernews.py: calls the program n: how many posts to print. A positive integer <= 100.
