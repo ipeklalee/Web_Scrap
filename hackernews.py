@@ -50,7 +50,9 @@ def web_scrap(maxRec_):
         #check for empty author value
         if (a[0].text): author = a[0].text #returns author value for the current loop which is in a[0]
         else:  author = 'no author name'
-        comments_arr = a[3].text.split() #returns author value for the current loop which is in a[0], split to remove string 'comment'
+		
+	if(len(a)>=4) : comments_arr = a[3].text.split() #returns author value for the current loop which is in a[0], split to remove string 'comment'
+        else: comments_arr = a[1].text.split() #returns author value for the current loop which is in a[0], split to remove string 'comment'
 
         #check for non-number or negative number value appearing as a comment value
         if comments_arr[0] == 'discuss' or comments_arr[0] < 0 :comments = '0'
