@@ -20,30 +20,28 @@ def web_scrap(maxRec_):
     records = [] 
     #array of dictionaries
 
-    cnt=0 #count for the records array
+    cnt=0 #count for the return limit
 
     #link, title and rank are under tag tr
     for div in soup.find_all('tr', class_="athing"):
         a = div.find_all('a', class_="storylink", ) #uri and title are under tag a class athing
 
-        #Below is for URL Validation but it does not work, 403 Forbidden
+        #Below is for URL Validation
         #ret = urllib2.urlopen(a[0].get("href"))
         #if ret.code == 200: uri = a[0].get("href")
 
         uri = a[0].get("href") #returns uri value for the current loop which is in a[0]
         title = a[0].text #returns title value for the current loop which is in a[0] as a text
         span = div.find_all('span', class_="rank", ) #rank is under tag span class rank
-        rank, s = span[0].text.split('.') #split with dot to get rank as a number
-
-        #check for negative number as a point value
-        if (rank < 0): rank = 0
+        rank, s = span[0].text.split('.') #split with dot to get rank as a number       
+        if (rank < 0): rank = 0 #check for negative number as a point value
         else: rank, s = span[0].text.split('.')
 
         records.append({"title": title, "uri":uri, "rank": rank}) #add pairs to the current index of array of dictionaries
-        cnt = cnt + 1 #increase count for iteration through records array
+        cnt = cnt + 1 #increase count 
         if cnt==maxRec: break
 
-    cnt = 0 #decrease count to zero to add pairs 
+    cnt = 0 #decrease count to zero
 
     #points author and comments are under tag td class subtext
     for div in soup.find_all('td', class_="subtext"):
@@ -65,7 +63,6 @@ def web_scrap(maxRec_):
         if (points_arr[0] < 0): points = 0
         else: points = points_arr[0]
 
-
         #update dictionary with new pairs
         records[cnt].update({'points': points}) 
         records[cnt].update({'author': author})
@@ -73,20 +70,20 @@ def web_scrap(maxRec_):
         cnt = cnt+1 #increase count for iteration through records array
         if cnt==maxRec: break
 
-
     #Dict to JSON conversion
     python2json=json.dumps(records, indent=4)
     print python2json
 
+#main method
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--posts", help="how many posts to print. A positive integer <= 100")
+    parser = argparse.ArgumentParser() #argument parser
+    parser.add_argument("--posts", help="how many posts to print. A positive integer <= 100") #CMD info for --post
     args = parser.parse_args()
     if args.posts:
-    	if 0 < int(args.posts) <= 100:
+    	if 0 < int(args.posts) <= 100: #expected n<=100
     		web_scrap(int(args.posts))
     	else:
-    		print "Posts must be a positive integer <= 100"
+    		print "Posts must be a positive integer <= 100" #display error in case n>100 or n<0
     else:
-    	parser.print_help()
+    	parser.print_help() #CMD help
 		
